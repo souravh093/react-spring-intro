@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { animated, useSpring } from "@react-spring/web";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const springs = useSpring({
+  //   from: { x: -100 },
+  //   to: { x: 0 },
+  // });
+
+  // const [springs, api] = useSpring(() => ({
+  //   from: {x: 0}
+  // }))
+
+  // const handleClick = () => {
+  //   api.start({
+  //     from: {
+  //       x: 100,
+  //     },
+  //     to: {
+  //       x: 0,
+  //     },
+  //   });
+  // };
+
+  const [props, api] = useSpring(() => ({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  })
+  );
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <div></div>
+      <h1>React Spring simple animation</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <animated.div
+          style={{
+            width: 80,
+            height: 80,
+            background: "#ff6d6d",
+            borderRadius: 8,
+            
+          }}
+        ></animated.div>
+        <animated.div
+          // onClick={handleClick}
+          style={{
+            width: 80,
+            height: 80,
+            background: "#ff6d6d",
+            borderRadius: 8,
+            ...props
+          }}
+        ></animated.div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
